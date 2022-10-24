@@ -12,7 +12,9 @@ notify:
     from_number: "<your whatspie phone number with country code prefix, e.g. 62111222333>"
     country_code: "<your country code prefix, e.g. 62>"
 ```
-- restart Home Assistant: Go to "Developer Tools", then press "Check Configuration" followed by "Restart"
+- Restart Home Assistant: Go to "Developer Tools", then press "Check Configuration" followed by "Restart"
+
+- Alternatively, you can install this integration from HACS by adding this github repository as a custom repository: https://hacs.xyz/docs/faq/custom_repositories/
 
 ## Usage
 
