@@ -2,7 +2,7 @@
 Send Home Assistant notifications to WhatsApp using [WhatsPie](https://whatspie.com/)
 
 ## Installation
-- Copy `whatspie` directory into `config/custom_components/`
+- Copy `custom_components/whatspie` directory into Home Assistant's `config/custom_components/`
 - Create a new notification service in your `configuration.yaml` file:
 ```yaml
 notify:
