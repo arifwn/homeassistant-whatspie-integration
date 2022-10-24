@@ -11,7 +11,7 @@ from homeassistant.components.notify import (
     BaseNotificationService,
 )
 
-WHATSPIE_API_ENDPOINT = "https://app.whatspie.com"
+WHATSPIE_API_ENDPOINT = "https://api.whatspie.com"
 
 
 def sanitize_number(phone_number, country_code):
@@ -32,12 +32,13 @@ def send_whatsapp_text_message(to, message, api_token, from_number, country_code
     if not from_number:
         return False
 
-    resp = requests.post(f'{WHATSPIE_API_ENDPOINT}/api/messages',
+    resp = requests.post(f'{WHATSPIE_API_ENDPOINT}/messages',
                      data=json.dumps({
                          'receiver': sanitize_number(str(to), country_code),
                          'device': from_number,
                          'message': message,
-                         'type': 'chat'
+                         'type': 'chat',
+                         'simulate_typing': 1
                      }),
                      headers={
                          'Content-Type': 'application/json',
