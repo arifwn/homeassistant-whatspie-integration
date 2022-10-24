@@ -1,5 +1,5 @@
 # homeassistant-whatspie-integration
-Send Home Assistant Notifications to WhatsApp using (WhatsPie)[https://whatspie.com/]
+Send Home Assistant Notifications to WhatsApp using [WhatsPie](https://whatspie.com/)
 
 ## Installation
 - Copy `whatspie` directory into `config/custom_components/`
