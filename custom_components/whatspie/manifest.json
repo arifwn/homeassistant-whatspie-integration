@@ -2,8 +2,9 @@
   "domain": "whatspie",
   "name": "Send WhatsApp Messages via WhatsPie",
   "version": "1.0.0",
-  "documentation": "https://sainsmograf.com/",
-  "dependencies": [],
-  "codeowners": [],
+  "documentation": "https://github.com/arifwn/homeassistant-whatspie-integration",
+  "issue_tracker": "https://github.com/arifwn/homeassistant-whatspie-integration/issues",
+  "dependencies": ["requests==2.28.1"],
+  "codeowners": ["@arifwn"],
   "iot_class": "cloud_push"
 }
