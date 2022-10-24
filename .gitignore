@@ -1,0 +1,8 @@
+.venv
+.envrc
+.vscode
+*.code-workspace
+*.pyc
+*.log
+*.pid
+__pycache__

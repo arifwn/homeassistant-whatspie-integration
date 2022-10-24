@@ -1,0 +1,9 @@
+{
+  "domain": "whatspie",
+  "name": "Send WhatsApp Messages via WhatsPie",
+  "version": "1.0.0",
+  "documentation": "https://sainsmograf.com/",
+  "dependencies": [],
+  "codeowners": [],
+  "iot_class": "cloud_push"
+}
