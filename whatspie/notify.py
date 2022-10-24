@@ -27,10 +27,6 @@ def sanitize_number(phone_number, country_code):
 def send_whatsapp_text_message(to, message, api_token, from_number, country_code):
     if not WHATSPIE_API_ENDPOINT:
         return False
-    if not api_token:
-        return False
-    if not from_number:
-        return False
 
     resp = requests.post(f'{WHATSPIE_API_ENDPOINT}/messages',
                      data=json.dumps({
