@@ -4,6 +4,8 @@ import logging
 import json
 import requests
 
+_LOGGER = logging.getLogger(__name__)
+
 from homeassistant.components.notify import (
     ATTR_DATA,
     ATTR_TARGET,
@@ -45,6 +47,10 @@ def send_whatsapp_text_message(to, message, api_token, from_number, country_code
                     )
     if resp.status_code == 200:
         return True
+    
+    _LOGGER.warning(
+        "WhatsPie HTTP API Response: %d - %s", resp.status_code, resp.text
+    )
 
     return False
 
