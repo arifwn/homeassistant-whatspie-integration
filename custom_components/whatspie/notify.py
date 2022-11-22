@@ -37,6 +37,7 @@ def send_whatsapp_text_message(to, message, api_token, from_number, country_code
                          'simulate_typing': 1
                      }),
                      headers={
+                         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
                          'Content-Type': 'application/json',
                          'Accept': 'application/json',
                          'Authorization': f'Bearer {api_token}'
