@@ -1,10 +1,10 @@
 {
   "domain": "whatspie",
   "name": "Send WhatsApp Messages via WhatsPie",
-  "version": "1.0.1",
-  "documentation": "https://github.com/arifwn/homeassistant-whatspie-integration",
-  "issue_tracker": "https://github.com/arifwn/homeassistant-whatspie-integration/issues",
-  "dependencies": [],
   "codeowners": ["@arifwn"],
-  "iot_class": "cloud_push"
+  "dependencies": [],
+  "documentation": "https://github.com/arifwn/homeassistant-whatspie-integration",
+  "iot_class": "cloud_push",
+  "issue_tracker": "https://github.com/arifwn/homeassistant-whatspie-integration/issues",
+  "version": "1.0.1"
 }
