@@ -13,7 +13,7 @@ from homeassistant.components.notify import (
     BaseNotificationService,
 )
 
-WHATSPIE_API_ENDPOINT = "https://app.whatspie.com"
+WHATSPIE_API_ENDPOINT = "https://api.whatspie.com"
 
 
 def sanitize_number(phone_number, country_code):
