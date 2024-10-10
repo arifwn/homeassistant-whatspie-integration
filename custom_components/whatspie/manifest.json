@@ -6,5 +6,5 @@
   "documentation": "https://github.com/arifwn/homeassistant-whatspie-integration",
   "iot_class": "cloud_push",
   "issue_tracker": "https://github.com/arifwn/homeassistant-whatspie-integration/issues",
-  "version": "1.0.2"
+  "version": "1.0.3"
 }
