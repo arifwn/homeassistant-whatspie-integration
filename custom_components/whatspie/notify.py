@@ -7,10 +7,16 @@ import logging
 import json
 import requests
 
-from homeassistant.components.notify import NotifyEntity
 from homeassistant.const import CONF_API_TOKEN
 from homeassistant.core import HomeAssistant, ServiceCall
 from homeassistant.helpers.entity_platform import async_get_current_platform
+from homeassistant.components.notify import (
+    ATTR_DATA,
+    ATTR_TARGET,
+    PLATFORM_SCHEMA,
+    BaseNotificationService,
+    NotifyEntity,
+)
 from .const import CONF_API_TOKEN, CONF_FROM_NUMBER, CONF_COUNTRY_CODE
 
 _LOGGER = logging.getLogger(__name__)
@@ -147,6 +153,10 @@ class WhatsPieNotificationService(NotifyEntity):
             _LOGGER.warning("No targets specified for WhatsPie notification.")
             return
 
+        # Ensure target is always a list (even if a single string is provided)
+        if isinstance(target, str):
+            target = [target]
+
         # Iterate over each target and send the message
         for to in target:
             success = await async_send_whatsapp_text_message(
@@ -154,3 +164,69 @@ class WhatsPieNotificationService(NotifyEntity):
             )
             if not success:
                 _LOGGER.error("Failed to send message to recipient: %s", to)
+
+def sanitize_legacy(phone_number, country_code):
+    if len(phone_number) == 0:
+        return phone_number
+    if phone_number[0] == '+':
+        return phone_number[1:]
+    if phone_number[0] == '0':
+        return country_code + phone_number[1:]
+    return phone_number
+
+def send_whatsapp_legacy_message(rec, message, api_token, from_number, country_code):
+    if not WHATSPIE_API_ENDPOINT:
+        return False
+
+    resp = requests.post(f'{WHATSPIE_API_ENDPOINT}/messages',
+                     data=json.dumps({
+                         'receiver': sanitize_legacy(str(rec), country_code),
+                         'device': from_number,
+                         'message': message,
+                         'type': 'chat',
+                         'simulate_typing': 1,
+                     }),
+                     headers={
+                         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
+                         'Content-Type': 'application/json',
+                         'Accept': 'application/json',
+                         'Authorization': f'Bearer {api_token}'
+                        }
+                    )
+    if resp.status_code == 200:
+        return True
+
+    _LOGGER.warning(
+        "WhatsPie HTTP API Response: %d - %s", resp.status_code, resp.text
+    )
+
+    return False
+
+class WhatsPieLegacyNotificationService(BaseNotificationService):
+    """Implement the notification service for the WhatsPie service."""
+
+    def __init__(self, api_token, from_number, country_code):
+        """Initialize the service."""
+        self.api_token = api_token
+        self.from_number = from_number
+        self.country_code = country_code
+
+    def send_message(self, message="", **kwargs):
+        """Send message to specified target phone number."""
+        targets = kwargs.get(ATTR_TARGET)
+        data = kwargs.get(ATTR_DATA) or {}
+
+        file_url = None
+        if 'media_url' in data:
+            file_url = data['media_url']
+
+        if not targets:
+            _LOGGER.info("At least 1 target is required")
+            return
+
+        for target in targets:
+            send_whatsapp_legacy_message(target, message, self.api_token, self.from_number, self.country_code)
+
+def get_service(hass, config, discovery_info=None):
+    """Get the WhatsPie notification service."""
+    return WhatsPieLegacyNotificationService(config['api_token'], config['from_number'], config['country_code'])
