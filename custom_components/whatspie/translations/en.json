@@ -1,0 +1,49 @@
+{
+  "title": "WhatsPie",
+  "config": {
+    "step": {
+      "user": {
+        "title": "WhatsPie Configuration",
+        "description": "Set up WhatsPie to send WhatsApp notifications.",
+        "data": {
+          "api_token": "API Token",
+          "from_number": "WhatsApp Phone Number",
+          "country_code": "Country Code"
+        }
+      }
+    },
+    "error": {
+      "auth_error": "Invalid API Token or Phone Number",
+      "connection_error": "Cannot connect to WhatsPie API. Check your network or API URL.",
+      "unknown_error": "An unexpected error occurred. Please try again.",
+      "invalid_phone_number": "The phone number is invalid. Please check the format.",
+      "invalid_country_code": "The country code is invalid. Please provide a valid code.",
+      "invalid_api_token": "The API token is invalid or missing. Please provide a valid API token."
+    }
+  },
+  "services": {
+    "notify": {
+      "name": "Send WhatsApp Message via WhatsPie",
+      "description": "Send a WhatsApp notification via WhatsPie.",
+      "fields": {
+        "data": {
+          "name": "Data",
+          "description": "Data for the WhatsPie notification, including message and target.",
+          "example": "{\"message\": \"Test Notification\", \"target\": [\"+123456789\"]}"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Edit WhatsPie Options",
+        "description": "Update WhatsPie configuration.",
+        "data": {
+          "from_number": "WhatsPie Phone Number",
+          "country_code": "Country Code"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+notify:
+  name: Send WhatsApp Message via WhatsPie
+  description: Send a WhatsApp notification via WhatsPie.
+  fields:
+    data:
+      name: Data
+      description: Data for the WhatsPie notification, including message and target.
+      example:
+        message: "Test Notification"
+        target:
+          - "+123456789"
